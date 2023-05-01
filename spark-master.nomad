@@ -44,7 +44,7 @@ job "spark-master-job" {
 
       service {
         name = "spark-master"
-        port = "web"
+        port = "ui"
         tags = ["urlprefix-/v2"]
 
         check {
