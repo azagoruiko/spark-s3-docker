@@ -38,6 +38,8 @@ job "spark-master-job" {
         args = [
           "/opt/spark/sbin/start-master.sh",
         ]
+
+        ports = ["ui", "master"]
       }
 
       resources {
