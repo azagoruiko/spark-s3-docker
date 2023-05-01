@@ -36,13 +36,9 @@ job "spark-master-job" {
           "/opt/spark/sbin/start-master.sh",
         ]
 
-        ports {
-          web = 8080
+        network {
+          port "web" {}
         }
-
-        volumes = [
-          "/var/nfs/:/var/nfs/",
-        ]
       }
 
       resources {
