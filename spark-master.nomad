@@ -36,7 +36,7 @@ job "spark-master-job" {
           "/opt/spark/sbin/start-master.sh",
         ]
 
-        port_map {
+        ports {
           web = 8080
         }
 
