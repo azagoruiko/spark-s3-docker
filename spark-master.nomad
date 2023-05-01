@@ -3,7 +3,7 @@ job "spark-master-job" {
   type        = "service"
   constraint {
     attribute = "${node.class}"
-    value     = "worker"
+    value     = "guestworker"
   }
   group "spark-master-group" {
     count = 1
@@ -42,11 +42,10 @@ job "spark-master-job" {
       resources {
         cpu    = 1000
         memory = 1000
-
-        network {
-          port  "web" {
-            static = 8080
-          }
+      }
+      network {
+        port  "web" {
+          static = 8080
         }
       }
 
