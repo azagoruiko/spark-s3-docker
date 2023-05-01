@@ -19,13 +19,16 @@ job "spark-master-job" {
       port "ui" {
         static = 8080
       }
+      port "master" {
+        static = 7077
+      }
     }
 
     task "spark-master-task" {
       driver = "docker"
 
       env {
-        REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY = "/var/nfs/docker"
+        SPARK_NO_DAEMONIZE = "true"
       }
 
       config {
