@@ -43,11 +43,6 @@ job "spark-master-job" {
         cpu    = 1000
         memory = 1000
       }
-      network {
-        port  "web" {
-          static = 8080
-        }
-      }
 
       service {
         name = "spark-master"
