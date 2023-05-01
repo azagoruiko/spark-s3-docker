@@ -15,6 +15,12 @@ job "spark-master-job" {
       mode     = "delay"
     }
 
+    network {
+      port  "web" {
+        static = 8080
+      }
+    }
+
     task "spark-master-task" {
       driver = "docker"
 
