@@ -35,15 +35,14 @@ job "spark-master-job" {
         args = [
           "/opt/spark/sbin/start-master.sh",
         ]
-
-        network {
-          port "web" {}
-        }
       }
 
       resources {
         cpu    = 1000
         memory = 1000
+        network {
+          port "web" {}
+        }
       }
 
       service {
