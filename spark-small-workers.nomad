@@ -49,7 +49,7 @@ job "spark-small-workers-job" {
       config {
         privileged = true
         image = "127.0.0.1:9999/docker/spark-master:0.0.1"
-        command = "echo \"bash /opt/spark/sbin/start-worker.sh $SPARK_MASTER\" > ./start.sh && echo \"\" >> ./start.sh && cat ./start.sh && bash ./start.sh"
+        command = "echo $SPARK_MASTER"
         args = [
           "",
         ]
