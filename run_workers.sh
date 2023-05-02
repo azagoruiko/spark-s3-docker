@@ -1,0 +1,1 @@
+/opt/spark/sbin/start-worker.sh $SPARK_MASTER
