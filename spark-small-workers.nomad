@@ -37,9 +37,8 @@ job "spark-small-workers-job" {
 
         {{ end }}
         EOH
-        destination = "/opt/spark/work-dir/workers.sh"
-        #destination = "local/file.env"
-        #env         = true
+        destination = "local/file.env"
+        env         = true
       }
       # template {
       #   data        = "KEY={{ key \"service/my-key\" }}"
@@ -50,9 +49,9 @@ job "spark-small-workers-job" {
       config {
         privileged = true
         image = "127.0.0.1:9999/docker/spark-master:0.0.1"
-        command = "bash"
+        command = "echo \"bash /opt/spark/sbin/start-worker.sh $SPARK_MASTER\n\" > /opt/spark/work-dir/start.sh && bash /opt/spark/work-dir/start.sh"
         args = [
-          "/opt/spark/work-dir/workers.sh",
+          "",
         ]
 
         ports = ["ui", "worker"]
