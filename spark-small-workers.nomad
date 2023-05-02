@@ -32,7 +32,7 @@ job "spark-small-workers-job" {
       }
       template {
         data = <<EOH
-        {{ range service "database" }}
+        {{ range service "spark-master" }}
         /opt/spark/sbin/start-worker.sh {{ .Address }}:{{ .Port }}
 
         {{ end }}
