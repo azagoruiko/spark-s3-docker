@@ -36,8 +36,9 @@ job "spark-small-workers-job" {
         SPARK_MASTER={{ .Address }}:{{ .Port }}
         {{ end }}
         EOH
-        destination = "local/file.env"
-        env         = true
+        destination = "local/master.conf"
+        #destination = "local/file.env"
+        #env         = true
       }
       # template {
       #   data        = "KEY={{ key \"service/my-key\" }}"
@@ -51,7 +52,7 @@ job "spark-small-workers-job" {
         command = "bash"
         args = [
           "/opt/spark/sbin/start-worker.sh",
-          "$SPARK_MASTER"
+          "${SPARK_MASTER}"
         ]
 
         ports = ["ui", "worker"]
