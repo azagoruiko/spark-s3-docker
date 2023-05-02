@@ -37,7 +37,7 @@ job "spark-small-workers-job" {
 
         {{ end }}
         EOH
-        destination = "local/workers.sh"
+        destination = "alloc/workers.sh"
         #destination = "local/file.env"
         #env         = true
       }
@@ -52,7 +52,7 @@ job "spark-small-workers-job" {
         image = "127.0.0.1:9999/docker/spark-master:0.0.1"
         command = "bash"
         args = [
-          "local/workers.sh",
+          "alloc/workers.sh",
         ]
 
         ports = ["ui", "worker"]
