@@ -3,7 +3,7 @@ job "spark-small-workers-job" {
   type        = "service"
   constraint {
     attribute = "${node.class}"
-    value     = "ora-free"
+    value     = "guestworker"
   }
   group "spark-small-workers-group" {
     count = 2
@@ -32,7 +32,7 @@ job "spark-small-workers-job" {
       }
       template {
         data = <<EOH
-        {{ range nomadService "database" }}
+        {{ range service "database" }}
         SPARK_MASTER={{ .Address }}:{{ .Port }}
         {{ end }}
         EOH
