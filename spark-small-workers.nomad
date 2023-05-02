@@ -33,10 +33,11 @@ job "spark-small-workers-job" {
       template {
         data = <<EOH
         {{ range service "database" }}
-        SPARK_MASTER={{ .Address }}:{{ .Port }}
+        /opt/spark/sbin/start-worker.sh {{ .Address }}:{{ .Port }}
+
         {{ end }}
         EOH
-        destination = "local/master.conf"
+        destination = "local/workers.sh"
         #destination = "local/file.env"
         #env         = true
       }
@@ -51,8 +52,7 @@ job "spark-small-workers-job" {
         image = "127.0.0.1:9999/docker/spark-master:0.0.1"
         command = "bash"
         args = [
-          "/opt/spark/sbin/start-worker.sh",
-          "${SPARK_MASTER}"
+          "local/workers.sh",
         ]
 
         ports = ["ui", "worker"]
