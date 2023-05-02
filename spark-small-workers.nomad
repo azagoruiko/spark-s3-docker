@@ -48,10 +48,11 @@ job "spark-small-workers-job" {
 
       config {
         privileged = true
-        image = "127.0.0.1:9999/docker/spark-master:0.0.2"
+        image = "127.0.0.1:9999/docker/spark-master:0.0.5"
         command = "bash"
         args = [
-          "/opt/spark/work-dir/run_workers.sh",
+          "/opt/spark/sbin/start-worker.sh",
+          "$SPARK_MASTER"
         ]
 
         ports = ["ui", "worker"]
