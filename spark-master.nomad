@@ -33,7 +33,7 @@ job "spark-master-job" {
 
       config {
         privileged = true
-        image = "10.8.0.5:5000/spark-s3:0.0.1"
+        image = "http://10.8.0.5:5000/spark-s3:0.0.1"
         command = "bash"
         args = [
           "/opt/spark/sbin/start-master.sh",
