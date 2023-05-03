@@ -33,7 +33,7 @@ job "spark-master-job" {
 
       config {
         privileged = true
-        image = "127.0.0.1:9999/docker/spark-master:0.0.1"
+        image = "127.0.0.1:9999/docker/spark-s3:0.0.1"
         command = "bash"
         args = [
           "/opt/spark/sbin/start-master.sh",
