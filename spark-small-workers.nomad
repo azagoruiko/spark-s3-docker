@@ -33,7 +33,7 @@ job "spark-small-workers-job" {
       template {
         data = <<EOH
         {{ range service "spark-master" }}
-        SPARK_MASTER=http://{{ .Address }}:7077
+        SPARK_MASTER={{ .Address }}:7077
 
         {{ end }}
         EOH
