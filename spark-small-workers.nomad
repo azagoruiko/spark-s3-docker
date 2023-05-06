@@ -40,15 +40,10 @@ job "spark-small-workers-job" {
         destination = "local/file.env"
         env         = true
       }
-      # template {
-      #   data        = "KEY={{ key \"service/my-key\" }}"
-      #   destination = "local/file.env"
-      #   env         = true
-      # }
 
       config {
         privileged = true
-        image = "10.8.0.5:5000/spark-s3:0.0.1"
+        image = "10.8.0.5:5000/spark-s3:0.0.2"
         command = "bash"
         args = [
           "/opt/spark/work-dir/run_workers.sh",
