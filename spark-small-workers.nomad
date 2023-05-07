@@ -7,6 +7,10 @@ job "spark-small-workers-job" {
   }
   group "spark-small-workers-group" {
     count = 2
+    constraint {
+      operator  = "distinct_hosts"
+      value     = "true"
+    }
 
     restart {
       attempts = 10
@@ -20,31 +24,32 @@ job "spark-small-workers-job" {
         static = 8081
       }
       port "worker" {
-        static = 7077
+        static = 7071
       }
     }
 
     task "spark-small-workers-task" {
       driver = "docker"
-
       env {
         SPARK_NO_DAEMONIZE = "true"
+        SPARK_WORKER_PORT = 7071
       }
       template {
         data = <<EOH
-        {{ range service "spark-master" }}
-        SPARK_MASTER={{ .Address }}:7077
-
-        {{ end }}
-        EOH
+{{ range service "spark-master" }}
+SPARK_MASTER=spark://{{ .Address }}:7077
+{{ end }}
+SPARK_PUBLIC_DNS="{{ env "attr.unique.network.ip-address" }}"
+EOH
         destination = "local/file.env"
         env         = true
       }
 
       config {
         privileged = true
-        image = "10.8.0.5:5000/spark-s3:0.0.2"
+        image = "10.8.0.5:5000/spark-s3:0.0.3"
         command = "bash"
+        network_mode = "host"
         args = [
           "/opt/spark/work-dir/run_workers.sh",
         ]
@@ -53,7 +58,7 @@ job "spark-small-workers-job" {
       }
 
       resources {
-        memory = 600
+        memory = 2000
       }
 
       service {
