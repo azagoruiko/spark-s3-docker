@@ -31,6 +31,9 @@ job "spark-master-job" {
         SPARK_LOCAL_IP="{{ env "attr.unique.network.ip-address" }}"
         SPARK_LOCAL_HOSTNAME="{{ env "attr.unique.network.ip-address" }}"
         EOH
+        destination = "secrets.env"
+        env = true
+      }
       env {
         SPARK_NO_DAEMONIZE = "true"
       }
