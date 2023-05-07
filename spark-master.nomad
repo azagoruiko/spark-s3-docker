@@ -26,14 +26,18 @@ job "spark-master-job" {
 
     task "spark-master-task" {
       driver = "docker"
-
+      template {
+        data = <<EOH
+        SPARK_LOCAL_IP="{{ env "attr.unique.network.ip-address" }}"
+        SPARK_LOCAL_HOSTNAME="{{ env "attr.unique.network.ip-address" }}"
+        EOH
       env {
         SPARK_NO_DAEMONIZE = "true"
       }
 
       config {
         privileged = true
-        image = "http://10.8.0.5:5000/spark-s3:0.0.2"
+        image = "http://10.8.0.5:5000/spark-s3:0.0.3"
         command = "bash"
         args = [
           "/opt/spark/sbin/start-master.sh",
