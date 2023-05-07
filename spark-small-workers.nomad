@@ -19,9 +19,6 @@ job "spark-small-workers-job" {
       port "ui" {
         static = 8081
       }
-      port "worker" {
-        static = 7077
-      }
     }
 
     task "spark-small-workers-task" {
@@ -48,7 +45,7 @@ job "spark-small-workers-job" {
           "/opt/spark/work-dir/run_workers.sh",
         ]
 
-        ports = ["ui", "worker"]
+        ports = ["ui"]
       }
 
       resources {
