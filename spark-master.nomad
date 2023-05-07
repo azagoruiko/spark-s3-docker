@@ -28,7 +28,6 @@ job "spark-master-job" {
       driver = "docker"
       template {
         data = <<EOH
-        SPARK_LOCAL_IP="{{ env "attr.unique.network.ip-address" }}"
         SPARK_LOCAL_HOSTNAME="{{ env "attr.unique.network.ip-address" }}"
         EOH
         destination = "secrets.env"

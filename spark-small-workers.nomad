@@ -35,7 +35,6 @@ job "spark-small-workers-job" {
         SPARK_MASTER={{ .Address }}:7077
 
         {{ end }}
-        SPARK_LOCAL_IP="{{ env "attr.unique.network.ip-address" }}"
         SPARK_LOCAL_HOSTNAME="{{ env "attr.unique.network.ip-address" }}"
         EOH
         destination = "local/file.env"
