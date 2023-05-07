@@ -29,6 +29,8 @@ job "spark-master-job" {
       template {
         data = <<EOH
         SPARK_LOCAL_HOSTNAME="{{ env "attr.unique.network.ip-address" }}"
+        SPARK_MASTER_IP="{{ env "attr.unique.network.ip-address" }}"
+        SPARK_PUBLIC_DNS="{{ env "attr.unique.network.ip-address" }}"
         EOH
         destination = "secrets.env"
         env = true
