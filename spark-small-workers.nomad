@@ -26,12 +26,6 @@ job "spark-small-workers-job" {
 
     task "spark-small-workers-task" {
       driver = "docker"
-      template {
-        data = <<EOH
-        SPARK_LOCAL_IP="{{ env "attr.unique.network.ip-address" }}"
-        SPARK_LOCAL_HOSTNAME="{{ env "attr.unique.network.ip-address" }}"
-        EOH
-      }
       env {
         SPARK_NO_DAEMONIZE = "true"
       }
@@ -41,6 +35,8 @@ job "spark-small-workers-job" {
         SPARK_MASTER={{ .Address }}:7077
 
         {{ end }}
+        SPARK_LOCAL_IP="{{ env "attr.unique.network.ip-address" }}"
+        SPARK_LOCAL_HOSTNAME="{{ env "attr.unique.network.ip-address" }}"
         EOH
         destination = "local/file.env"
         env         = true
