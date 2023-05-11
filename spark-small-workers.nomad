@@ -30,7 +30,7 @@ job "spark-small-workers-job" {
         data = <<EOH
         {{ range service "spark-master" }}
         SPARK_MASTER=spark://{{ .Address }}:7077
-        SPARK_PUBLIC_DNS={{ .Address }}
+        SPARK_PUBLIC_DNS="{{ env "attr.unique.network.ip-address" }}"
         SPARK_MASTER_IP={{ .Address }}
         {{ end }}
 
