@@ -6,7 +6,7 @@ job "spark-small-workers-job" {
     value     = "guestworker"
   }
   group "spark-small-workers-group" {
-    count = 2
+    count = 1
 
     restart {
       attempts = 10
@@ -31,7 +31,7 @@ job "spark-small-workers-job" {
         {{ range service "spark-master" }}
         SPARK_MASTER=spark://{{ .Address }}:7077
         {{ end }}
-
+        SPARK_PUBLIC_DNS="{{ env "attr.unique.network.ip-address" }}"
         EOH
         destination = "local/file.env"
         env         = true
