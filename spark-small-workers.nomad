@@ -6,7 +6,11 @@ job "spark-small-workers-job" {
     value     = "guestworker"
   }
   group "spark-small-workers-group" {
-    count = 1
+    count = 2
+    constraint {
+      operator  = "distinct_hosts"
+      value     = "true"
+    }
 
     restart {
       attempts = 10
