@@ -36,11 +36,11 @@ job "spark-small-workers-job" {
       }
       template {
         data = <<EOH
-        {{ range service "spark-master" }}
-        SPARK_MASTER=spark://{{ .Address }}:7077
-        {{ end }}
-        SPARK_PUBLIC_DNS="{{ env "attr.unique.network.ip-address" }}"
-        EOH
+{{ range service "spark-master" }}
+SPARK_MASTER=spark://{{ .Address }}:7077
+{{ end }}
+SPARK_PUBLIC_DNS="{{ env "attr.unique.network.ip-address" }}"
+EOH
         destination = "local/file.env"
         env         = true
       }
@@ -49,6 +49,7 @@ job "spark-small-workers-job" {
         privileged = true
         image = "10.8.0.5:5000/spark-s3:0.0.3"
         command = "bash"
+        network_mode = "host"
         args = [
           "/opt/spark/work-dir/run_workers.sh",
         ]
