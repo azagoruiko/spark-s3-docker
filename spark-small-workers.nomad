@@ -23,12 +23,16 @@ job "spark-small-workers-job" {
       port "ui" {
         static = 8081
       }
+      port "worker" {
+        static = 7071
+      }
     }
 
     task "spark-small-workers-task" {
       driver = "docker"
       env {
         SPARK_NO_DAEMONIZE = "true"
+        SPARK_WORKER_PORT = 7071
       }
       template {
         data = <<EOH
@@ -49,7 +53,7 @@ job "spark-small-workers-job" {
           "/opt/spark/work-dir/run_workers.sh",
         ]
 
-        ports = ["ui"]
+        ports = ["ui", "worker"]
       }
 
       resources {
