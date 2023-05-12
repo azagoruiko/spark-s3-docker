@@ -58,7 +58,7 @@ EOH
       }
 
       resources {
-        memory = 600
+        memory = 2000
       }
 
       service {
