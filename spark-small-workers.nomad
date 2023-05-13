@@ -6,7 +6,7 @@ job "spark-small-workers-job" {
     value     = "guestworker"
   }
   group "spark-small-workers-group" {
-    count = 2
+    count = 3
     constraint {
       operator  = "distinct_hosts"
       value     = "true"
